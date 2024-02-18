@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nomenclatures</title>
+</head>
+<body>
+    <h1>Nomenclatures</h1>
+    <table>
+        <tr th:each="nom : ${nomenclatures}">
+            <td th:text="${nom.getCode()}"></td>
+            <td th:text="${nom.getCategory()}"></td>
+            <td th:text="${nom.getTitle()}"></td>
+            <td th:text="${nom.getOptPrice()}"></td>
+            <td th:text="${nom.getPrice()}"></td>
+        </tr>
+    </table>
+</body>
+</html>
