@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    background-color: #212529;
+    color: #fffffd;
+}
+
+h1 {
+    font-size: 16px;
+    text-align: center;
+}
+
+header, footer, .main-screen, .navigation-bar {
+    margin: 0;
+    border: 1px solid #495057;
+    font-size: 14px;
+    padding: 10px;
+}
+
+header {
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    height: 500px;
+}
+
+.navigation-bar {
+    font-size: 16px;
+}
+
+.main-screen {
+}
+
+footer {
+}
