@@ -1,6 +1,7 @@
 package org.belotelov.diplom.controllers;
 
 import lombok.AllArgsConstructor;
+import org.belotelov.diplom.models.Nomenclature;
 import org.belotelov.diplom.repositories.MarketRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

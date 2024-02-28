@@ -39,9 +39,17 @@
                     <td th:text="${nom.getTitle()}"></td>
                     <td th:text="${nom.getOptPrice()}"></td>
                     <td th:text="${nom.getPrice()}"></td>
+                    <td>
+                        <form th:method="GET" th:action="@{/nom/delete/{code}(code=${nom.getCode()})}">
+                            <button type="submit" class="btn btn-primary">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        <form th:method="GET" th:action="@{/nom/new}">
+            <button type="submit" class="btn btn-primary">Создать</button>
+        </form>
     </div>
 </main>
 <footer>

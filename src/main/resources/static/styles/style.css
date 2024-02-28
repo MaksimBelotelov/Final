@@ -9,6 +9,10 @@ h1 {
     text-align: center;
 }
 
+.table-header {
+    font-size: 14px;
+}
+
 header, footer, .main-screen, .navigation-bar {
     margin: 0;
     border: 1px solid #495057;
@@ -22,7 +26,7 @@ header {
 main {
     display: grid;
     grid-template-columns: 1fr 6fr;
-    height: 500px;
+    height: 800px;
 }
 
 .navigation-bar {
@@ -30,6 +34,7 @@ main {
 }
 
 .main-screen {
+    height: auto;
 }
 
 footer {
