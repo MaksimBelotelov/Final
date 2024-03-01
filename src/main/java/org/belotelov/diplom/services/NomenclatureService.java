@@ -6,6 +6,7 @@ import org.belotelov.diplom.repositories.NomenclatureRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -23,7 +24,13 @@ public class NomenclatureService {
         nomenclatureRepo.save(nomenclature);
     }
 
+    public Nomenclature getNomenclatureByCode(Integer code) { return nomenclatureRepo.findNomenclatureByCode(code); }
+
     public void deleteNomenclatureByCode(Integer code) {
         nomenclatureRepo.removeNomenclatureByCode(code);
+    }
+
+    public void updateNomenclature(Nomenclature nomenclature) {
+        nomenclatureRepo.save(nomenclature);
     }
 }

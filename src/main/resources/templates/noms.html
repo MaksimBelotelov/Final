@@ -40,8 +40,13 @@
                     <td th:text="${nom.getOptPrice()}"></td>
                     <td th:text="${nom.getPrice()}"></td>
                     <td>
+                        <form th:method="GET" th:action="@{/nom/update/{code}(code=${nom.getCode()})}">
+                            <button type="submit" class="btn btn-primary">Редактировать</button>
+                        </form>
+                    </td>
+                    <td>
                         <form th:method="GET" th:action="@{/nom/delete/{code}(code=${nom.getCode()})}">
-                            <button type="submit" class="btn btn-primary">Delete</button>
+                            <button type="submit" class="btn btn-primary">Удалить</button>
                         </form>
                     </td>
                 </tr>

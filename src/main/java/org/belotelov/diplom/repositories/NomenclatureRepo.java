@@ -13,4 +13,6 @@ public interface NomenclatureRepo extends JpaRepository<Nomenclature, Integer> {
     Optional<List<Nomenclature>> findNomenclaturesByCategory_Id(Long categoryId);
     @Transactional
     void removeNomenclatureByCode(Integer code);
+
+    Nomenclature findNomenclatureByCode(Integer code);
 }

@@ -46,6 +46,23 @@ public class NomenclatureController {
         return "redirect:/nom";
     }
 
+    @GetMapping("/update/{code}")
+    public String showNomenclatureUpdateForm(@PathVariable("code") Integer code, Model model) {
+        Nomenclature nomenclature = nomenclatureService.getNomenclatureByCode(code);
+        List<Category> categories = categoryService.getAllCategories();
+        model.addAttribute("categoriesList", categories);
+        model.addAttribute("nomenclature", nomenclature);
+        return "update-nom";
+    }
+
+    @PostMapping("/update")
+    public String updateNomenclature(@ModelAttribute("nomenclature") Nomenclature nomenclature) {
+        nomenclatureService.updateNomenclature(nomenclature);
+        return "redirect:/nom";
+    }
+
+
+
     @GetMapping("/delete/{code}")
     public String deleteNomenclature(@PathVariable("code") Integer code) {
         nomenclatureService.deleteNomenclatureByCode(code);

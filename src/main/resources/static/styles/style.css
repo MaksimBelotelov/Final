@@ -29,6 +29,10 @@ main {
     height: 800px;
 }
 
+.buttons {
+    display: flex;
+}
+
 .navigation-bar {
     font-size: 16px;
 }
