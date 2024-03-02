@@ -18,13 +18,22 @@
             <form th:method="GET" th:action="@{/markets}">
                 <a class="nav-link" href="/markets">Маркеты</a>
             </form>
-            <a class="nav-link" href="/warehouse">Склад</a>
+            <a class="nav-link" href="#">Склад</a>
             <a class="nav-link" href="/nom">Номенклатуры</a>
             <a class="nav-link" href="#">Отчеты</a>
             <a class="nav-link" href="#">Настройки</a>
         </nav>
     </div>
     <div class="main-screen">
+        <div class="navigation-bar">
+            <nav class="nav flex-column nav-pills">
+                <a class="nav-link" href="supply">Приход</a>
+                <a class="nav-link" href="#">Остатки</a>
+                <a class="nav-link" href="#">Инвентаризация</a>
+                <a class="nav-link" href="#">Списание</a>
+                <a class="nav-link" href="#">Перемещение</a>
+            </nav>
+        </div>
     </div>
 </main>
 <footer>

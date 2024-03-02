@@ -61,8 +61,6 @@ public class NomenclatureController {
         return "redirect:/nom";
     }
 
-
-
     @GetMapping("/delete/{code}")
     public String deleteNomenclature(@PathVariable("code") Integer code) {
         nomenclatureService.deleteNomenclatureByCode(code);

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="/styles/style.css" rel="stylesheet">
+  <title>Поставка</title>
+</head>
+<body>
+<header>
+  <h1>Управление микромаркетами</h1>
+</header>
+<main>
+  <div class="navigation-bar">
+    <nav class="nav flex-column nav-pills">
+      <a class="nav-link" href="/">Главная</a>
+      <a class="nav-link" href="/markets">Маркеты</a>
+      <a class="nav-link" href="#">Склад</a>
+      <a class="nav-link active" href="#">Номенклатуры</a>
+      <a class="nav-link" href="#">Отчеты</a>
+      <a class="nav-link" href="#">Настройки</a>
+    </nav>
+  </div>
+  <div class="main-screen">
+    <table class="table table-dark table-hover table-striped table-sm">
+      <thead>
+      <th scope="col">№</th>
+      <th scope="col">Номенклатура</th>
+      <th scope="col">Количество</th>
+      <th scope="col">Сумма на закупку</th>
+      </thead>
+      <tbody>
+      <h1>Товары в поставке</h1>
+      <tr th:each="item : ${items}">
+        <td th:text="${item.getId()}"></td>
+        <td th:text="${item.getNomenclature().getTitle()}"></td>
+        <td th:text="${item.getQuantity()}"></td>
+      </tr>
+      </tbody>
+    </table>
+    <!--<form th:method="GET" th:action="@{/nom/new}">
+      <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+    -->
+  </div>
+</main>
+<footer>
+  Копирайт подвал
+</footer>
+</body>
+</html>

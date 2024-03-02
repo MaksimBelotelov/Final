@@ -7,8 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping()
 public class MainController {
-    @GetMapping
+    @GetMapping()
     public String getMainPage() {
         return "index";
+    }
+
+    @GetMapping("warehouse")
+    public String redirectToWarehousePage() {
+        return "warehouse-page";
     }
 }

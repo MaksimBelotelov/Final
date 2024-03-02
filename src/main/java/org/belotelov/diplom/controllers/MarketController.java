@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @AllArgsConstructor
 @RequestMapping("/markets")
 public class MarketController {
-
     private MarketRepository marketRepository;
     @GetMapping()
     public String showMarkets(Model model) {
         model.addAttribute("markets", marketRepository.findAll());
         return "markets";
     }
+
 }
