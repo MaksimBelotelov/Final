@@ -16,7 +16,6 @@ public class Stock {
     @Id
     @GeneratedValue
     private Long id;
-
     @ManyToOne
     private Market market;
     @ManyToOne

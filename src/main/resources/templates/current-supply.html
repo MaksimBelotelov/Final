@@ -32,17 +32,20 @@
       </thead>
       <tbody>
       <h1>Товары в поставке</h1>
-      <tr th:each="item : ${items}">
-        <td th:text="${item.getId()}"></td>
+      <tr th:each="item, counter : ${items}">
+        <td th:text="${counter.count}"></td>
         <td th:text="${item.getNomenclature().getTitle()}"></td>
         <td th:text="${item.getQuantity()}"></td>
       </tr>
       </tbody>
     </table>
-    <!--<form th:method="GET" th:action="@{/nom/new}">
-      <button type="submit" class="btn btn-primary">Добавить</button>
+    <form th:method="POST" th:action="@{/supply/open/add/{idofsupply}(idofsupply=${idOfSupply})}">
+      <div class="mb-1">
+        <label for="code" class="form-label">Штрих-код: </label>
+        <input type="text" class="form-control" id="code" name="code" />
+      </div>
+      <button type="submit" class="btn btn-primary">Добавить товар</button>
     </form>
-    -->
   </div>
 </main>
 <footer>

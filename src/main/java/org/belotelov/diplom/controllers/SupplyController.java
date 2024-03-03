@@ -6,6 +6,7 @@ import org.belotelov.diplom.models.Nomenclature;
 import org.belotelov.diplom.models.Supply;
 import org.belotelov.diplom.models.SupplyItem;
 import org.belotelov.diplom.services.MarketService;
+import org.belotelov.diplom.services.NomenclatureService;
 import org.belotelov.diplom.services.SupplyItemService;
 import org.belotelov.diplom.services.SupplyService;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ public class SupplyController {
     private final SupplyService supplyService;
     private final MarketService marketService;
     private final SupplyItemService supplyItemService;
+    private final NomenclatureService nomenclatureService;
 
     @GetMapping()
     public String showAllSupplies(Model model) {
@@ -45,8 +47,21 @@ public class SupplyController {
     @GetMapping("/open/{id}")
     public String openSupply(@PathVariable("id") Integer id, Model model) {
         List<SupplyItem> listOfItems = supplyItemService.getSupplyItemsBySupplyId(id.longValue());
-        model.addAttribute("items",
-                listOfItems);
+        model.addAttribute("items", listOfItems);
+        model.addAttribute("idOfSupply", id);
         return "current-supply";
+    }
+
+    @PostMapping("/open/add/{idofsupply}")
+    public String addNomToSupply(@PathVariable("idofsupply") Long idOfSupply,
+                                 @RequestParam("code") Integer code) {
+        Nomenclature nom = nomenclatureService.getNomenclatureByCode(code);
+        if (nom != null) {
+            Supply supply = supplyService.getSupplyById(idOfSupply);
+            if(supply != null ) {
+                supplyItemService.addItemToSupply(supply, nom);
+            }
+        }
+        return "redirect:/supply/open/" + idOfSupply;
     }
 }

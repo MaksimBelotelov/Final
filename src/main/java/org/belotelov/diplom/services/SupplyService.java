@@ -11,6 +11,7 @@ import org.belotelov.diplom.repositories.SupplyRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +22,8 @@ public class SupplyService {
     public List<Supply> getAllSupplies() {
         return supplyRepository.findAll();
     }
+
+    public Supply getSupplyById(Long id) { return supplyRepository.findSupplyById(id); }
 
     public void addSupply(Supply supply) {
         supplyRepository.save(supply);
