@@ -1,5 +1,6 @@
 package org.belotelov.diplom.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Supply {
     private LocalDate supplyDate = LocalDate.now();
     @ManyToOne
     private Market market;
+    @JsonManagedReference
     @OneToMany(mappedBy = "supply")
     private List<SupplyItem> supplyItems;
     private Boolean processed;

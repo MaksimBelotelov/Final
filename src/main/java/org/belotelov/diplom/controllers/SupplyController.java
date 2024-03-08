@@ -30,6 +30,12 @@ public class SupplyController {
         return "supplies";
     }
 
+    @GetMapping("/stock")
+    public String showAllStocks(Model model) {
+        model.addAttribute("stocks", supplyService.getAllStocks());
+        return "stocks";
+    }
+
     @GetMapping("/new")
     public String showNewSupplyForm(Model model) {
         List<Market> markets = marketService.getAllMarkets();
@@ -63,5 +69,16 @@ public class SupplyController {
             }
         }
         return "redirect:/supply/open/" + idOfSupply;
+    }
+
+    @GetMapping("/provide/{idofsupply}")
+    public String provideSupply(@PathVariable("idofsupply") Long idOfSupply) {
+        Supply supply = supplyService.getSupplyById(idOfSupply);
+        if(supply != null) {
+            supplyService.processSupply(supply);
+            supply.setProcessed(true);
+            supplyService.addSupply(supply);
+        }
+        return "redirect:/supply";
     }
 }

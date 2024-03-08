@@ -23,6 +23,8 @@ public class SupplyService {
         return supplyRepository.findAll();
     }
 
+    public List<Stock> getAllStocks() { return stockRepository.findAll(); }
+
     public Supply getSupplyById(Long id) { return supplyRepository.findSupplyById(id); }
 
     public void addSupply(Supply supply) {
@@ -31,8 +33,6 @@ public class SupplyService {
 
     @Transactional
     public void processSupply(Supply supply) {
-        supplyRepository.save(supply);
-
         for (SupplyItem item : supply.getSupplyItems()) {
             Stock stock = stockRepository.findByMarketAndNomenclature(supply.getMarket(), item.getNomenclature())
                     .orElse(new Stock());

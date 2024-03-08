@@ -9,12 +9,10 @@ import org.belotelov.diplom.repositories.SupplyRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+
 
 @SpringBootTest
 @Import(SupplyItemService.class)
@@ -26,7 +24,7 @@ public class SupplyItemServiceIntegrationTest {
     private SupplyItemRepository supplyItemRepository;
 
     @Autowired
-    private SupplyRepository supplyRepository; // Предполагается, что у вас есть репозиторий для Supply
+    private SupplyRepository supplyRepository;
 
     @Autowired
     private NomenclatureRepo nomenclatureRepository;

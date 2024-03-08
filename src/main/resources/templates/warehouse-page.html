@@ -14,11 +14,11 @@
 <main>
     <div class="navigation-bar">
         <nav class="nav flex-column nav-pills">
-            <a class="nav-link active" href="#">Главная</a>
+            <a class="nav-link" href="#">Главная</a>
             <form th:method="GET" th:action="@{/markets}">
                 <a class="nav-link" href="/markets">Маркеты</a>
             </form>
-            <a class="nav-link" href="#">Склад</a>
+            <a class="nav-link active" href="#">Склад</a>
             <a class="nav-link" href="/nom">Номенклатуры</a>
             <a class="nav-link" href="#">Отчеты</a>
             <a class="nav-link" href="#">Настройки</a>
@@ -28,7 +28,7 @@
         <div class="navigation-bar">
             <nav class="nav flex-column nav-pills">
                 <a class="nav-link" href="supply">Приход</a>
-                <a class="nav-link" href="#">Остатки</a>
+                <a class="nav-link" href="supply/stock">Остатки</a>
                 <a class="nav-link" href="#">Инвентаризация</a>
                 <a class="nav-link" href="#">Списание</a>
                 <a class="nav-link" href="#">Перемещение</a>
