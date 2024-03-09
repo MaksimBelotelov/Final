@@ -2,10 +2,8 @@ package org.belotelov.diplom.services;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.belotelov.diplom.models.Nomenclature;
-import org.belotelov.diplom.models.Stock;
-import org.belotelov.diplom.models.Supply;
-import org.belotelov.diplom.models.SupplyItem;
+import org.belotelov.diplom.models.*;
+import org.belotelov.diplom.repositories.AccountRepository;
 import org.belotelov.diplom.repositories.StockRepository;
 import org.belotelov.diplom.repositories.SupplyRepository;
 import org.springframework.stereotype.Service;
@@ -18,6 +16,7 @@ import java.util.Optional;
 public class SupplyService {
     private SupplyRepository supplyRepository;
     private StockRepository stockRepository;
+    private AccountRepository accountRepository;
 
     public List<Supply> getAllSupplies() {
         return supplyRepository.findAll();
@@ -33,6 +32,7 @@ public class SupplyService {
 
     @Transactional
     public void processSupply(Supply supply) {
+        double total = 0.0;
         for (SupplyItem item : supply.getSupplyItems()) {
             Stock stock = stockRepository.findByMarketAndNomenclature(supply.getMarket(), item.getNomenclature())
                     .orElse(new Stock());
@@ -42,7 +42,13 @@ public class SupplyService {
                 stock.setQuantity(0);
             }
             stock.setQuantity(stock.getQuantity() + item.getQuantity());
+            total += item.getQuantity()*item.getNomenclature().getOptPrice();
             stockRepository.save(stock);
         }
+        Account account = supply.getMarket().getAccount();
+        account.setBalance(account.getBalance() - total);
+        accountRepository.save(account);
+        supply.setProcessed(true);
+        supplyRepository.save(supply);
     }
 }

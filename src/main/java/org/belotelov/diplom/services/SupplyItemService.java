@@ -30,6 +30,7 @@ public class SupplyItemService {
         else {
             existingNom.setQuantity(existingNom.getQuantity() + 1);
             supplyItemRepository.save(existingNom);
+
         }
     }
 }

@@ -52,8 +52,11 @@ public class SupplyController {
 
     @GetMapping("/open/{id}")
     public String openSupply(@PathVariable("id") Integer id, Model model) {
+        Double total = 0.0;
         List<SupplyItem> listOfItems = supplyItemService.getSupplyItemsBySupplyId(id.longValue());
+        for(SupplyItem item : listOfItems) total += item.getQuantity() * item.getNomenclature().getOptPrice();
         model.addAttribute("items", listOfItems);
+        model.addAttribute("total", total);
         model.addAttribute("idOfSupply", id);
         return "current-supply";
     }
@@ -76,8 +79,6 @@ public class SupplyController {
         Supply supply = supplyService.getSupplyById(idOfSupply);
         if(supply != null) {
             supplyService.processSupply(supply);
-            supply.setProcessed(true);
-            supplyService.addSupply(supply);
         }
         return "redirect:/supply";
     }
