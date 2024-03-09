@@ -1,9 +1,6 @@
 package org.belotelov.diplom.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -16,4 +13,7 @@ public class Market {
     private String address;
     @Column(name = "employee")
     private String employee;
+    @OneToOne
+    @JoinColumn(name="account")
+    private Account account;
 }
