@@ -83,3 +83,23 @@ CREATE TABLE IF NOT EXISTS `writeoff`
     FOREIGN KEY (`market`) REFERENCES `market` (`id`),
     FOREIGN KEY (`nomenclature`) REFERENCES `nomenclature` (`code`)
 );
+
+CREATE TABLE IF NOT EXISTS `inventory`
+(
+    `id`         INT AUTO_INCREMENT PRIMARY KEY,
+    `inventorydate` DATE,
+    `market_id`  INT,
+    `processed`  BOOLEAN,
+    CONSTRAINT fk_inventory_market FOREIGN KEY (`market_id`) REFERENCES `market` (`id`)
+);
+
+CREATE TABLE IF NOT EXISTS `inventory_item`
+(
+    `id`                INT AUTO_INCREMENT PRIMARY KEY,
+    `inventory_id`      INT,
+    `nomenclature_code` INT,
+    `current_quantity`  INT,
+    `collected_quantity` INT,
+    CONSTRAINT fk_inventory_items_supply FOREIGN KEY (`inventory_id`) REFERENCES `inventory` (`id`),
+    CONSTRAINT fk_inventory_items_nom FOREIGN KEY (`nomenclature_code`) REFERENCES `nomenclature` (`code`)
+);

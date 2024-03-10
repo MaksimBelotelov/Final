@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="/styles/style.css" rel="stylesheet">
+    <title>Инвентаризация</title>
+</head>
+<body>
+<header>
+    <h1>Управление микромаркетами</h1>
+</header>
+<main>
+    <div class="navigation-bar">
+        <nav class="nav flex-column nav-pills">
+            <a class="nav-link" href="/">Главная</a>
+            <a class="nav-link" href="/markets">Маркеты</a>
+            <a class="nav-link active" href="#">Склад</a>
+            <a class="nav-link" href="#">Номенклатуры</a>
+            <a class="nav-link" href="#">Отчеты</a>
+            <a class="nav-link" href="#">Настройки</a>
+        </nav>
+    </div>
+    <div class="main-screen">
+            <table class="table table-dark table-hover table-striped table-sm">
+                <thead>
+                    <th scope="col">№</th>
+                    <th scope="col">Номенклатура</th>
+                    <th scope="col">Остаток</th>
+                    <th scope="col" th:width="10px">Собрано</th>
+                </thead>
+                <tbody>
+                <h1>Инвентаризация</h1>
+                <tr th:each="item, counter : ${inventory.getInventoryItems()}">
+                    <td th:text="${counter.count}"></td>
+                    <td th:text="${item.getNomenclature().getTitle()}"></td>
+                    <td th:text="${item.getCurrentQuantity()}"></td>
+                    <td th:text="${item.getCollectedQuantity()}"></td>
+                    <td>
+                        <form th:method="GET" th:action="@{/inventory/update/{invItemId}(invItemId=${item.getId()})}">
+                            <button type="submit" class="btn btn-primary">Ввести</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+                <a href="/inventory"> <button type="button" class="btn btn-primary">Назад</button> </a>
+    </div>
+</main>
+<footer>
+    Копирайт подвал
+</footer>
+</body>
+</html>
