@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `market`
 (
     `id`      int NOT NULL,
     `address` varchar(45) DEFAULT NULL,
-    employee varchar(45) DEFAULT NULL,
+    employee  varchar(45) DEFAULT NULL,
     PRIMARY KEY (`id`)
 );
 
@@ -56,10 +56,10 @@ CREATE TABLE IF NOT EXISTS stock
 
 CREATE TABLE IF NOT EXISTS `sale`
 (
-    `id`         INT AUTO_INCREMENT PRIMARY KEY,
-    `saledate`   DATE,
-    `market_id`  INT,
-    `processed`  BOOLEAN,
+    `id`        INT AUTO_INCREMENT PRIMARY KEY,
+    `saledate`  DATE,
+    `market_id` INT,
+    `processed` BOOLEAN,
     CONSTRAINT fk_supply_market FOREIGN KEY (`market_id`) REFERENCES `market` (`id`)
 );
 
@@ -71,4 +71,15 @@ CREATE TABLE IF NOT EXISTS `sale_item`
     `quantity`          INT,
     CONSTRAINT fk_sale_items_sale FOREIGN KEY (`sale_id`) REFERENCES `sale` (`id`),
     CONSTRAINT fk_sale_items_nom FOREIGN KEY (`nomenclature_code`) REFERENCES `nomenclature` (`code`)
+);
+
+CREATE TABLE IF NOT EXISTS `writeoff`
+(
+    `id`              INT AUTO_INCREMENT PRIMARY KEY,
+    `writeoffdate`    DATE,
+    `market`          INT,
+    `nomenclature`    INT,
+    `reason`          VARCHAR(50),
+    FOREIGN KEY (`market`) REFERENCES `market` (`id`),
+    FOREIGN KEY (`nomenclature`) REFERENCES `nomenclature` (`code`)
 );
