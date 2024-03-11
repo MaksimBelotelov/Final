@@ -53,11 +53,15 @@ public class SupplyController {
     @GetMapping("/open/{id}")
     public String openSupply(@PathVariable("id") Integer id, Model model) {
         Double total = 0.0;
+        Supply supply = supplyService.getSupplyById(id.longValue());
         List<SupplyItem> listOfItems = supplyItemService.getSupplyItemsBySupplyId(id.longValue());
-        for(SupplyItem item : listOfItems) total += item.getQuantity() * item.getNomenclature().getOptPrice();
+        for(SupplyItem item : listOfItems)
+            total += item.getQuantity() * item.getNomenclature().getOptPrice();
         model.addAttribute("items", listOfItems);
         model.addAttribute("total", total);
         model.addAttribute("idOfSupply", id);
+        model.addAttribute("supply", supply);
+
         return "current-supply";
     }
 

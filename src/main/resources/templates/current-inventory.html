@@ -39,7 +39,7 @@
                     <td th:text="${item.getCollectedQuantity()}"></td>
                     <td>
                         <form th:method="GET" th:action="@{/inventory/update/{invItemId}(invItemId=${item.getId()})}">
-                            <button type="submit" class="btn btn-primary">Ввести</button>
+                            <button th:unless="${inventory.processed}" type="submit" class="btn btn-primary">Ввести</button>
                         </form>
                     </td>
                 </tr>
