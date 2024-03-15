@@ -24,14 +24,48 @@
             <a class="nav-link" href="/sale/new">Продажа</a>
             <a class="nav-link" href="#">Настройки</a>
             <a class="nav-link" href="/logout">Выход</a>
-
         </nav>
     </div>
     <div class="main-screen">
+        <table class="table table-dark table-hover table-striped table-sm">
+            <thead>
+                <th scope="col">Маркет</th>
+                <th scope="col">Остаток на счёте</th>
+            </thead>
+            <tbody>
+            <h1>Остатки на счетах</h1>
+            <tr th:each="market : ${markets}">
+                <td th:text="${market.getId()}"></td>
+                <td th:text="${market.getAccount().getBalance()}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-dark table-hover table-striped table-sm">
+            <thead>
+            <th scope="col">Показатель</th>
+            <th scope="col">Значение</th>
+            </thead>
+            <tbody>
+            <h1>Продажи сегодня</h1>
+            <tr>
+                <td>Продаж сегодня: </td>
+                <td th:text="${sales.size()}"></td>
+            </tr>
+            <tr>
+                <td>Выручка сегодня: </td>
+                <td th:text="${revenue}"></td>
+            </tr>
+            <tr>
+                <td>Средний чек: </td>
+                <td th:text="${revenue/sales.size()}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </main>
 <footer>
-    Копирайт подвал
+    Белотелов Максим, 2024
 </footer>
 </body>
 </html>

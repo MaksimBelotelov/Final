@@ -11,6 +11,9 @@ import org.belotelov.diplom.repositories.SaleRepository;
 import org.belotelov.diplom.repositories.StockRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class SaleService {
@@ -23,6 +26,10 @@ public class SaleService {
     }
 
     public Sale getSaleById(Long id) { return saleRepository.findSaleById(id); }
+
+    public List<Sale> getSalesByDate(LocalDate date) {
+        return saleRepository.findSalesBySaledate(date);
+    }
 
     @Transactional
     public void processSale(Sale sale) {
