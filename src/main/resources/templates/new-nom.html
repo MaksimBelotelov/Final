@@ -30,6 +30,7 @@
                     <div class="mb-1">
                         <label for="code" class="form-label">Штрих-код: </label>
                         <input type="text" class="form-control" th:field="*{code}" id="code" />
+                        <div style="color:red;" th:if="${#fields.hasErrors('code')}" th:text="Digits_Only_Allowed"></div>
                     </div>
                     <div class="mb-1">
                         <label for="category" class="form-label">Категория: </label>
@@ -39,18 +40,22 @@
                                     th:value="${category.id}"
                                     th:text="${category.title}">Категория</option>
                         </select>
+                        <div style="color:red;" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
                     </div>
                     <div class="mb-1">
                         <label for="title" class="form-label">Наименование: </label>
                         <input type="text" class="form-control" th:field="*{title}" id="title" />
+                        <div style="color:red;" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
                     </div>
                     <div class="mb-1">
                         <label for="optPrice" class="form-label">Оптовая цена: </label>
                         <input type="text" class="form-control" th:field="*{optPrice}" id="optPrice" />
+                        <div style="color:red;" th:if="${#fields.hasErrors('optPrice')}" th:text="Should_Be_A_Number"></div>
                     </div>
                     <div class="mb-1">
                         <label for="price" class="form-label">Розничная цена: </label>
                         <input type="text" class="form-control" th:field="*{price}" id="price" />
+                        <div style="color:red;" th:if="${#fields.hasErrors('price')}" th:text="Should_Be_A_Number"></div>
                     </div>
                     <a href="/nom"><button type="button" class="btn btn-primary">Назад</button></a>
                     <button type="submit" class="btn btn-primary">Сохранить</button>

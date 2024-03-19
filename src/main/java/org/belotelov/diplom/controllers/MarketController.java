@@ -1,5 +1,6 @@
 package org.belotelov.diplom.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.belotelov.diplom.models.Category;
 import org.belotelov.diplom.models.Market;
@@ -8,6 +9,7 @@ import org.belotelov.diplom.repositories.MarketRepository;
 import org.belotelov.diplom.services.MarketService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +36,10 @@ public class MarketController {
     }
 
     @PostMapping("/new")
-    public String createNewMarket(@ModelAttribute("market") Market market) {
+    public String createNewMarket(@ModelAttribute("market") @Valid Market market,
+                                  BindingResult bindingResult) {
+        if(bindingResult.hasErrors())
+            return "new-market";
         marketService.addNewMarket(market);
         return "redirect:/markets";
     }

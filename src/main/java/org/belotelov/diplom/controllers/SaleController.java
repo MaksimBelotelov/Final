@@ -64,9 +64,10 @@ public class SaleController {
     @GetMapping("/process/{idofsale}")
     public String processSale(@PathVariable("idofsale") Long idOfSale) {
         Sale sale = saleService.getSaleById(idOfSale);
-
-        if(sale != null)
+        if(sale != null && !sale.getSaleItems().isEmpty())
             saleService.processSale(sale);
+        else
+            saleService.removeSale(sale);
 
         return "redirect:/sale/new";
     }

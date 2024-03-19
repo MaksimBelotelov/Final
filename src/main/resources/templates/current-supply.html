@@ -47,7 +47,8 @@
     <form th:method="POST" th:action="@{/supply/open/add/{idofsupply}(idofsupply=${idOfSupply})}">
       <div class="mb-1">
         <label for="code" class="form-label">Штрих-код: </label>
-        <input type="text" class="form-control" id="code" name="code" />
+        <input type="text" class="form-control" id="code" name="code" required/>
+
       </div>
       <a href="/supply"> <button type="button" class="btn btn-primary">Назад</button> </a>
       <button th:unless="${supply.processed}" type="submit" class="btn btn-primary">Добавить товар</button>

@@ -35,6 +35,7 @@
                                     th:value="${market.id}"
                                     th:text="${market.getId()}">Маркет</option>
                         </select>
+                        <div style="color:red;" th:if="${#fields.hasErrors('market')}" th:errors="*{market}"></div>
                     </div>
                     <div class="mb-1">
                         <label for="supply-date" class="form-label">Дата поставки: </label>

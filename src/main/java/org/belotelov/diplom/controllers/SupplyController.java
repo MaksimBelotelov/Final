@@ -1,16 +1,15 @@
 package org.belotelov.diplom.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.belotelov.diplom.models.Market;
-import org.belotelov.diplom.models.Nomenclature;
-import org.belotelov.diplom.models.Supply;
-import org.belotelov.diplom.models.SupplyItem;
+import org.belotelov.diplom.models.*;
 import org.belotelov.diplom.services.MarketService;
 import org.belotelov.diplom.services.NomenclatureService;
 import org.belotelov.diplom.services.SupplyItemService;
 import org.belotelov.diplom.services.SupplyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,14 +37,16 @@ public class SupplyController {
 
     @GetMapping("/new")
     public String showNewSupplyForm(Model model) {
-        List<Market> markets = marketService.getAllMarkets();
-        model.addAttribute("marketsList", markets);
         model.addAttribute("supply", new Supply());
         return "new-supply";
     }
 
     @PostMapping("/new")
-    public String createNewSupply(@ModelAttribute("supply") Supply supply) {
+    public String createNewSupply(@ModelAttribute("supply") @Valid Supply supply,
+                                  BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "new-supply";
+        }
         supplyService.addSupply(supply);
         return "redirect:/supply";
     }
@@ -68,11 +69,13 @@ public class SupplyController {
     @PostMapping("/open/add/{idofsupply}")
     public String addNomToSupply(@PathVariable("idofsupply") Long idOfSupply,
                                  @RequestParam("code") Integer code) {
-        Nomenclature nom = nomenclatureService.getNomenclatureByCode(code);
-        if (nom != null) {
-            Supply supply = supplyService.getSupplyById(idOfSupply);
-            if(supply != null ) {
-                supplyItemService.addItemToSupply(supply, nom);
+        if(code != null) {
+            Nomenclature nom = nomenclatureService.getNomenclatureByCode(code);
+            if (nom != null) {
+                Supply supply = supplyService.getSupplyById(idOfSupply);
+                if (supply != null) {
+                    supplyItemService.addItemToSupply(supply, nom);
+                }
             }
         }
         return "redirect:/supply/open/" + idOfSupply;
@@ -87,5 +90,8 @@ public class SupplyController {
         return "redirect:/supply";
     }
 
-
+    @ModelAttribute("marketsList")
+    public List<Market> getListOfMarkets() {
+        return marketService.getAllMarkets();
+    }
 }

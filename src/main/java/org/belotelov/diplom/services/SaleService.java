@@ -53,4 +53,8 @@ public class SaleService {
         sale.setProcessed(true);
         saleRepository.save(sale);
     }
+
+    public void removeSale(Sale sale) {
+        saleRepository.delete(sale);
+    }
 }

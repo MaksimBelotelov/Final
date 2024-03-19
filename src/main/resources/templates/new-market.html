@@ -30,10 +30,12 @@
                     <div class="mb-1">
                         <label for="id" class="form-label">Номер: </label>
                         <input type="text" class="form-control" th:field="*{id}" id="id" />
+                        <div style="color:red;" th:if="${#fields.hasErrors('id')}" th:text="Only_digits_allowed"></div>
                     </div>
                     <div class="mb-1">
-                        <label for="category" class="form-label">Адрес: </label>
-                        <input type="text" class="form-control" th:field="*{address}" id="category" />
+                        <label for="address" class="form-label">Адрес: </label>
+                        <input type="text" class="form-control" th:field="*{address}" id="address" />
+                        <div style="color:red;" th:if="${#fields.hasErrors('address')}" th:text="Should_Be_Not_Empty"></div>
                     </div>
                     <div class="mb-1">
                         <label for="employee" class="form-label">Мерчендайзер: </label>
